@@ -261,8 +261,19 @@ function createList(){
    dCard.style.position = 'relative';
    dCard.style.top = '70px';
 
+   let delCard = createElem('a');
+   delCard.id = "a" + (i + 1);
+   delCard.textContent = ' X  ';
+   delCard.style.float = 'right';
+   delCard.style.marginRight = '10px';
+   delCard.style.marginTop = '7px';
+   delCard.style.color = 'black';
+   append(delCard,  dCard);
+   delCard.addEventListener('click', delCards);
+
    let h3 = createElem('h3');
    h3.textContent = list.value;
+   h3.id = 'h' +(i + 1);
    h3.style.margin = '5px';
 
    list.value = 'Добавить список...';
@@ -282,6 +293,7 @@ function createList(){
    cardBut.addEventListener('mouseover', () => cardBut.style.opacity = 1);
    cardBut.addEventListener('mouseout', () => cardBut.style.opacity = 0.7);
    cardBut.addEventListener('click', cardButClick);
+   
    append(h3,  dCard);
    append(cardBut,  dCard);
 
@@ -337,6 +349,12 @@ function cardButClick(event){
  text.style.display = 'block';
  save1.style.display = 'inline-block';
  event.target.style.display = 'none';
+}
+
+function delCards(event){
+  let card_id = event.target.id.substring(1);
+  let d = document.getElementById("d" + card_id);
+  d.remove();
 }
 
 function hideCardButt(event){

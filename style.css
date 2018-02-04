@@ -1,0 +1,179 @@
+body{
+	margin: 0;
+
+}
+#surface{
+	background: #266b94;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	position: fixed;
+
+}
+#header{
+
+        position: absolute;
+
+        width: 100%;
+   
+}
+#main{
+
+	background: #266b94;
+
+	top: 50px;
+	position: relative;
+
+
+}
+ul.topnav{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+ul.topnav li{
+	margin-top: 6px;
+	position: relative;
+    border: 1px solid #4682B4;
+    border-radius: 5px;
+    height: 30px;
+}
+
+ul.topnav li.left{
+	background: #4682B4;
+	margin-left: 10px;
+    float: left;
+}
+ul.topnav li.right{
+	float: right;
+	margin-right: 10px;
+	min-width: 30px;
+}
+ul.topnav li.logo{
+	margin: 0;
+	left: 50%;
+    margin-left: -40px;
+	border: none;
+	position: absolute;
+}
+a {
+	opacity: .75;
+	text-decoration: none;
+	color: white; 
+
+}
+a:hover {
+	opacity: 1;
+	text-decoration: none;
+}
+span{
+	height: 30px;
+	font-weight: bold;
+	font-family: arial;
+	font-size: 15px;
+	vertical-align: super;
+}
+.search {
+	vertical-align: top;
+	height: 25px;
+	background-color: #4682B4;
+	border: none;
+
+}
+.search:active {
+	opacity: 1;
+	
+}
+#can{
+	width: 80%;
+    height: 65%;
+
+}
+.createDiv{
+ 
+ border : 1px solid black;
+  border-radius: 5px;
+  display: inline-block;
+  position: absolute;
+  position: flex;
+  background: #C0C0C0;
+  margin-top: 20px;
+  margin-left: 20px;
+  overflow: visible;
+  width: 220px;
+ 
+
+
+}
+.textA{
+	margin-left: 10px;
+  position: flex;
+	width: 200px;
+	margin-right: 5px;
+}
+.X {
+ border: 1px solid grey;
+ border-radius: 5px;
+ font-size: 15px;
+ margin: 5px;
+ height: 25px;
+
+
+}
+.saveS{
+  background: green;
+  height: 25px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin: 5px;
+  font-size: 15px;
+  }
+
+div.over {
+    border: 2px dashed black;
+  background-color:  #4682B4;
+
+
+}
+div.preOver{
+  background-color: grey;
+}
+.overLi:before{
+	content: ' ';
+	background: green;
+	display: block;
+	border: 1px solid #4682B4;
+	border-radius: 5px;
+	height: 2em;
+  }
+	li.liMini {
+
+  border: 1px solid grey;
+  border-radius: 5px;
+  height: 2em;
+  list-style-type: none;
+  background:#E6E6FA;
+  width: 200px;
+  padding: 0;
+  margin-left: -30px;
+  margin-top: -30px;
+  margin-bottom: -10px;
+  vertical-align: text-bottom;
+  }
+  ul.ulMini{
+ display:inline-block;
+ margin-bottom: 10px;
+ margin-top: 10px;
+ 
+  }
+
+  .highlighted {
+  background-color: yellow;
+}
+.validtarget {
+  background-color: lightblue;
+}
+
+ 

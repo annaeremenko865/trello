@@ -480,12 +480,15 @@ function dragenter(event) {
 
     }
     if (target.classList.contains('dd') && !target.classList.contains('currentDD')) {
-    
+    if (target.classList.contains('createDiv') &&  target.draggable === true ){
+       target.classList.remove('over');
+    }
       target.classList.remove('currentDD');
       target.classList.remove('preOverDD');
-//       target.classList.remove('over');
+     
       target.classList.add('overDD');
-      // console.log('enterDD', target)
+     
+
     }
      // console.log('enterDD', target)
      // return true;
@@ -545,4 +548,6 @@ document.addEventListener('dragover', dragover);
 document.addEventListener('dragleave', dragleave);
 document.addEventListener('dragstart', dragstart);
 document.addEventListener('dragend', dragend); 
+
+
 

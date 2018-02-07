@@ -114,13 +114,14 @@ function create(event){
     addInput(40, 135, 200, 20, '');
     butX.createBut(20, 95);
     butX.setTextX('Создать', 55, 102);
+    can.addEventListener('click', () => document.removeEventListener('click', create));
   }
+ 
 }
 
 function removeInput() {
  let nodes = document.getElementById('tab');
- // for (var i = 0; i < nodes.length; i++){
- //   nodes[i].parentNode.removeChild(nodes[i]);}
+
 document.body.removeChild(nodes);
 }
 
@@ -130,7 +131,7 @@ function cancel(e){
     card.clearC(5, 5);
     desk(5, 5, 100, 25);
     removeInput();
-    let nodes = document.getElementById('tab');
+    can.addEventListener('click', () => document.addEventListener('click', create));
   }
 }
 
@@ -329,8 +330,7 @@ function createList(){
 }
 
 function createHList(event) {
-  console.log("CreateHList")
-  let target = event.target;
+   let target = event.target;
    if(target.id === 'saveC'){
     if (list.value === '' || list.value === 'Добавить список...'){return;}
     else{
@@ -357,6 +357,15 @@ function delCards(event){
   d.remove();
 }
 
+
+function delList(event){
+  let card_id = event.target.id.substring(2);
+  
+  let dd = document.getElementById("dd" + card_id);
+  // console.log(li)
+  dd.remove();
+}
+
 function hideCardButt(event){
  let card_id = event.target.id.substring(1);
  let text = document.getElementById("text" + card_id);
@@ -375,23 +384,30 @@ function saveCards(event){
  let x1 = document.getElementById("x" + card_id);
  let text = document.getElementById("text" + card_id);
  let dCard =  document.getElementById("d" + card_id);
+ let delCard = document.getElementById("a" + card_id);
+ let delCardClone = delCard.cloneNode(true);
+ delCardClone.id = "aa" + card_id + (j + 1); 
+ delCardClone.addEventListener('click', delList);
   if(text.value !== ''){
-   let ul = createElem('ul');
-   ul.classList.add('ulMini');
-   ul.id = 'ul' + card_id;
-   let li = createElem('li');
-   li.id = 'li' + card_id +  (j + 1 );
-   li.classList.add('liMini');
-   li.draggable = 'true';
-   li.textContent = text.value;
+   let dd = createElem('div');
+   dd.classList.add('dd');
+   dd.draggable = 'true';
+   dd.id = 'dd' + card_id + (j + 1 );
+   dd.textContent = text.value;
    text.value = '';
-   append(li, ul);
-   dCard.insertBefore(ul, text);
-   li.addEventListener('mouseover', (event) => event.target.style.background = '#DCDCDC');
-   li.addEventListener('mouseout', (event) => event.target.style.background = 'white');
+   dd.background = '#DCDCDC';
+   append(delCardClone, dd);
+   dCard.insertBefore(dd, text);
+  //  dd.addEventListener('mouseover', (event) => {event.target.style.background = '#DCDCDC';
+  //                                              delCardClone.style.background ='#DCDCDC' } );
+  // dd.addEventListener('mouseout', (event) => {event.target.style.background = 'white';
+  //                                              delCardClone.style.background ='white' });
+
+  
    j++;
   }
 }
+
 
 CanvasRenderingContext2D.prototype.fillRect = fillRect;
 
@@ -415,63 +431,113 @@ document.addEventListener('click', cancel);
 document.addEventListener('click', showBlock);
 
 
+
+
 function dragstart(event) {
  let target = event.target;
+ 
   if (target.draggable !== true) {return;}
-    if (target.tagName === 'DIV' && target.draggable === true) {
+    if (target.className === 'createDiv' ) {
       target.classList.add('currentDiv'); 
       target.classList.add('preOver');
-      event.dataTransfer.setData('text/plain', target.id);
     }
+    if (target.className === 'dd') {
+      target.classList.add('currentDD'); 
+      target.classList.add('preOverDD');
+    }
+    event.dataTransfer.setData('text/plain', target.id);
+    // console.log('start',target);
+    // return true
 }
+
 function dragend(event) {
  let target = event.target;
-  if (target.tagName === 'DIV' && target.draggable === true) {
+ if (target.draggable !== true) {return;}
+
+  if (target.classList.contains('createDiv')) {
     target.classList.remove('currentDiv');
     target.classList.remove('preOver');
   }
+  if (target.classList.contains('dd') ){
+    target.classList.remove('currentDD');
+    target.classList.remove('preOverDD');
+  } 
+  // console.log('end', target);
+  // return true;
 } 
  
 
+
 function dragenter(event) {
  let target = event.target;
-  if (target.classList.contains('currentDiv')) {return; }
-    if ( target.tagName === 'DIV' && target.draggable === true) {
+ if (target.draggable !== true ) { return}
+    if (target.classList.contains('createDiv') && !target.classList.contains('currentDiv')){
       target.classList.remove('currentDiv');
       target.classList.remove('preOver');
+      // target.classList.remove('overDD');
       target.classList.add('over');
+      // console.log('enterDiv', target)
+
     }
+    if (target.classList.contains('dd') && !target.classList.contains('currentDD')) {
+    
+      target.classList.remove('currentDD');
+      target.classList.remove('preOverDD');
+//       target.classList.remove('over');
+      target.classList.add('overDD');
+      // console.log('enterDD', target)
+    }
+     // console.log('enterDD', target)
+     // return true;
 }
 
+
+
 function dragleave(event) {
- let target = event.target;
-  if ( target.classList.contains('currentDiv')) {return; }
-    if (target.tagName === 'DIV'  && target.draggable === true) {
-      target.classList.remove('over');
-    }
+let target = event.target;
+ if (target.draggable !== true ) { return;}
+      if (target.classList.contains('createDiv') && !target.classList.contains('currentDiv')){
+         target.classList.remove('over');
+         
+      } 
+      if (target.classList.contains('dd') && !target.classList.contains('currentDD')){
+        
+         target.classList.remove('over');
+      } 
 }
+
+
 
 function drop(event) {
  let target = event.target;
-  if ( target.tagName === 'DIV' && target.draggable === true ) {
+  if (target.classList.contains('createDiv') && target.draggable === true ) {
     let d = event.dataTransfer.getData('text');
     d = document.getElementById(d);
     target.classList.remove('over');
-     // target.classList.remove('preOver');
+     target.classList.remove('preOver');
     if (d.offsetLeft > target.offsetLeft){
       target.parentNode.insertBefore(d, target);
     } else {
       target.parentNode.insertBefore(d, target.nextSibling);
-          }
-  }        
+      }
+  }    
+  if ( target.classList.contains('dd') && target.draggable === true ) {
+    let d = event.dataTransfer.getData('text');
+    d = document.getElementById(d);
+    target.classList.remove('overDD');
+    target.classList.remove('preOverDD');
+    target.parentNode.insertBefore(d, target);
+    // return false;
+  }    
 }
 
 function dragover(event) {
  let target = event.target;
-  if ( target.draggable !== true) {return; }
-   
     event.preventDefault();
+    
+    
 }
+
 
 document.addEventListener('dragenter', dragenter); 
 document.addEventListener('drop', drop);
@@ -479,5 +545,4 @@ document.addEventListener('dragover', dragover);
 document.addEventListener('dragleave', dragleave);
 document.addEventListener('dragstart', dragstart);
 document.addEventListener('dragend', dragend); 
-
 

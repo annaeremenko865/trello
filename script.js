@@ -502,7 +502,7 @@ let target = event.target;
       } 
       if (target.classList.contains('dd') && !target.classList.contains('currentDD')){
         
-         target.classList.remove('over');
+         target.classList.remove('overDD');
       } 
 }
 

@@ -504,7 +504,8 @@ let target = event.target;
          
       } 
       if (target.classList.contains('dd') && !target.classList.contains('currentDD')){
-        
+         if (target.classList.contains('createDiv') &&  target.draggable === true ){
+       target.classList.remove('over');}
          target.classList.remove('overDD');
       } 
 }
@@ -548,6 +549,5 @@ document.addEventListener('dragover', dragover);
 document.addEventListener('dragleave', dragleave);
 document.addEventListener('dragstart', dragstart);
 document.addEventListener('dragend', dragend); 
-
 
 
